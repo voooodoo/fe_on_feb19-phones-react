@@ -30,7 +30,14 @@ class App extends React.Component {
 
             <div className="col-md-10">
               { this.state.selectedPhone ? (
-                <Viewer phone={this.state.selectedPhone}/>
+                <Viewer
+                  phone={this.state.selectedPhone}
+                  onBack={() => {
+                    this.setState({
+                      selectedPhone: null,
+                    });
+                  }}
+                />
               ) : (
                 <Catalog
                   phones={this.state.phones}
@@ -52,7 +59,7 @@ class App extends React.Component {
 const Viewer = (props) => (
   <div>
     <img className="phone" src={props.phone.images[0]}/>
-    <button>Back</button>
+    <button onClick={props.onBack}>Back</button>
     <button>Add to basket</button>
 
     <h1>{props.phone.name}</h1>
