@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getAll, getById } from './api/phone'
+import { getAll } from './api/phone'
 
 import './App.css';
 
@@ -12,12 +12,6 @@ class App extends React.Component {
     this.state = {
       phones: getAll(),
     };
-
-    setInterval(() => {
-      this.setState({
-        phones: this.state.phones.slice(1),
-      });
-    }, 2000)
   }
 
   render() {
@@ -26,29 +20,8 @@ class App extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2">
-              <section>
-                <p>
-                  Search:
-                  <input />
-                </p>
-
-                <p>
-                  Sort by:
-                  <select>
-                    <option value="name">Alphabetical</option>
-                    <option value="age">Newest</option>
-                  </select>
-                </p>
-              </section>
-
-              <section>
-                <p>Shopping Cart</p>
-                <ul>
-                  <li>Phone 1</li>
-                  <li>Phone 2</li>
-                  <li>Phone 3</li>
-                </ul>
-              </section>
+              <Filter/>
+              <Basket/>
             </div>
 
             <div className="col-md-10">
@@ -79,6 +52,38 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+const Basket = () => {
+  return (
+    <section>
+      <p>Shopping Cart</p>
+      <ul>
+        <li>Phone 1</li>
+        <li>Phone 2</li>
+        <li>Phone 3</li>
+      </ul>
+    </section>
+  );
+};
+
+const Filter = () => {
+  return (
+    <section>
+      <p>
+        Search:
+        <input />
+      </p>
+
+      <p>
+        Sort by:
+        <select>
+          <option value="name">Alphabetical</option>
+          <option value="age">Newest</option>
+        </select>
+      </p>
+    </section>
+  );
 }
 
 export default App;
