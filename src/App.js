@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { getAll } from './api/phone'
+import { getAll, getById } from './api/phone'
+import Basket from './Basket'
+import Filter from './Filter'
+import Catalog from './Catalog'
 
 import './App.css';
 
@@ -11,6 +14,7 @@ class App extends React.Component {
 
     this.state = {
       phones: getAll(),
+      selectedPhone: getById()
     };
   }
 
@@ -20,32 +24,13 @@ class App extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2">
-              <Filter/>
-              <Basket/>
+              <Filter />
+              <Basket />
             </div>
 
             <div className="col-md-10">
-              <ul className="phones">
-                { this.state.phones.map(phone => (
-                  <li className="thumbnail">
-                    <a href={'#' + phone.id} className="thumb">
-                      <img
-                        alt={phone.name}
-                        src={phone.imageUrl}
-                      />
-                    </a>
-
-                    <div className="phones__btn-buy-wrapper">
-                      <a className="btn btn-success">
-                        Add
-                      </a>
-                    </div>
-
-                    <a href={'#' + phone.id}>{phone.name}</a>
-                    <p>{phone.snippet}</p>
-                  </li>
-                )) }
-              </ul>
+              <Viewer phone={this.state.selectedPhone}/>
+              <Catalog phones={this.state.phones} />
             </div>
           </div>
         </div>
@@ -54,36 +39,23 @@ class App extends React.Component {
   }
 }
 
-const Basket = () => {
-  return (
-    <section>
-      <p>Shopping Cart</p>
-      <ul>
-        <li>Phone 1</li>
-        <li>Phone 2</li>
-        <li>Phone 3</li>
-      </ul>
-    </section>
-  );
-};
+const Viewer = (props) => (
+  <div>
+    <img className="phone" src={props.phone.images[0]}/>
+    <button>Back</button>
+    <button>Add to basket</button>
 
-const Filter = () => {
-  return (
-    <section>
-      <p>
-        Search:
-        <input />
-      </p>
+    <h1>{props.phone.name}</h1>
+    <p>{props.phone.description}</p>
 
-      <p>
-        Sort by:
-        <select>
-          <option value="name">Alphabetical</option>
-          <option value="age">Newest</option>
-        </select>
-      </p>
-    </section>
-  );
-}
+    <ul className="phone-thumbs">
+      { props.phone.images.map(imageUrl => (
+        <li>
+          <img src={imageUrl}/>
+        </li>
+      )) }
+    </ul>
+  </div>
+);
 
 export default App;
