@@ -14,7 +14,7 @@ class App extends React.Component {
 
     this.state = {
       phones: getAll(),
-      selectedPhone: getById()
+      selectedPhone: null,
     };
   }
 
@@ -29,8 +29,11 @@ class App extends React.Component {
             </div>
 
             <div className="col-md-10">
-              <Viewer phone={this.state.selectedPhone}/>
-              <Catalog phones={this.state.phones} />
+              { this.state.selectedPhone ? (
+                <Viewer phone={this.state.selectedPhone}/>
+              ) : (
+                <Catalog phones={this.state.phones} />
+              ) }
             </div>
           </div>
         </div>
