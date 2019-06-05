@@ -12,6 +12,8 @@ class App extends React.Component {
     this.state = {
       phones: getAll(),
     };
+
+    console.log(this.state.phones);
   }
 
   render() {
@@ -47,25 +49,25 @@ class App extends React.Component {
 
             <div className="col-md-10">
               <ul className="phones">
-                <li className="thumbnail">
-                  <a href="#!/phones/motorola-xoom-with-wi-fi" className="thumb">
-                    <img
-                      alt="Motorola XOOM™ with Wi-Fi"
-                      src="img/phones/motorola-xoom-with-wi-fi.0.jpg"
-                    />
-                  </a>
-
-                  <div className="phones__btn-buy-wrapper">
-                    <a className="btn btn-success">
-                      Add
+                { this.state.phones.map(phone => (
+                  <li className="thumbnail">
+                    <a href={'#' + phone.id} className="thumb">
+                      <img
+                        alt={phone.name}
+                        src={phone.imageUrl}
+                      />
                     </a>
-                  </div>
 
-                  <a href="#!/phones/motorola-xoom-with-wi-fi">Motorola XOOM™ with Wi-Fi</a>
-                  <p>The Next, Next Generation
+                    <div className="phones__btn-buy-wrapper">
+                      <a className="btn btn-success">
+                        Add
+                      </a>
+                    </div>
 
-                    Experience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb).</p>
-                </li>
+                    <a href={'#' + phone.id}>{phone.name}</a>
+                    <p>{phone.snippet}</p>
+                  </li>
+                )) }
               </ul>
             </div>
           </div>
