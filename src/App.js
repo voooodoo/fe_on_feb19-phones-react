@@ -13,7 +13,11 @@ class App extends React.Component {
       phones: getAll(),
     };
 
-    console.log(this.state.phones);
+    setInterval(() => {
+      this.setState({
+        phones: this.state.phones.slice(1),
+      });
+    }, 2000)
   }
 
   render() {
