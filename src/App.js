@@ -1,7 +1,19 @@
 import React from 'react';
+
+import { getAll, getById } from './api/phone'
+
 import './App.css';
 
-class App {
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      phones: getAll(),
+    };
+  }
+
   render() {
     return (
       <div className="App">
