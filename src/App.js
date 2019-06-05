@@ -32,7 +32,14 @@ class App extends React.Component {
               { this.state.selectedPhone ? (
                 <Viewer phone={this.state.selectedPhone}/>
               ) : (
-                <Catalog phones={this.state.phones} />
+                <Catalog
+                  phones={this.state.phones}
+                  onPhoneSelected={(phoneId) => {
+                    this.setState({
+                      selectedPhone: getById(phoneId),
+                    });
+                  }}
+                />
               ) }
             </div>
           </div>
