@@ -15,6 +15,7 @@ class App extends React.Component {
     this.state = {
       phones: getAll(),
       selectedPhone: null,
+      basketItems: [],
     };
   }
 
