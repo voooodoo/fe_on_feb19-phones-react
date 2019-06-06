@@ -1,65 +1,79 @@
 import React from 'react';
+
+import { getAll, getById } from './api/phone'
+import Basket from './Basket'
+import Filter from './Filter'
+import Catalog from './Catalog'
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="container-fluid">
-        <div className="row">
 
-          <div className="col-md-2">
-            <section>
-              <p>
-                Search:
-                <input />
-              </p>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-              <p>
-                Sort by:
-                <select>
-                  <option value="name">Alphabetical</option>
-                  <option value="age">Newest</option>
-                </select>
-              </p>
-            </section>
+    this.state = {
+      phones: getAll(),
+      selectedPhone: null,
+      basketItems: [],
+    };
+  }
 
-            <section>
-              <p>Shopping Cart</p>
-              <ul>
-                <li>Phone 1</li>
-                <li>Phone 2</li>
-                <li>Phone 3</li>
-              </ul>
-            </section>
-          </div>
+  render() {
+    return (
+      <div className="App">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-2">
+              <Filter />
+              <Basket />
+            </div>
 
-          <div className="col-md-10">
-            <ul className="phones">
-              <li className="thumbnail">
-                <a href="#!/phones/motorola-xoom-with-wi-fi" className="thumb">
-                  <img
-                    alt="Motorola XOOM™ with Wi-Fi"
-                    src="img/phones/motorola-xoom-with-wi-fi.0.jpg"
-                  />
-                </a>
-
-                <div className="phones__btn-buy-wrapper">
-                  <a className="btn btn-success">
-                    Add
-                  </a>
-                </div>
-
-                <a href="#!/phones/motorola-xoom-with-wi-fi">Motorola XOOM™ with Wi-Fi</a>
-                <p>The Next, Next Generation
-
-                  Experience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb).</p>
-              </li>
-            </ul>
+            <div className="col-md-10">
+              { this.state.selectedPhone ? (
+                <Viewer
+                  phone={this.state.selectedPhone}
+                  onBack={() => {
+                    this.setState({
+                      selectedPhone: null,
+                    });
+                  }}
+                />
+              ) : (
+                <Catalog
+                  phones={this.state.phones}
+                  onPhoneSelected={(phoneId) => {
+                    this.setState({
+                      selectedPhone: getById(phoneId),
+                    });
+                  }}
+                />
+              ) }
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+const Viewer = (props) => (
+  <div>
+    <img className="phone" src={props.phone.images[0]}/>
+    <button onClick={props.onBack}>Back</button>
+    <button>Add to basket</button>
+
+    <h1>{props.phone.name}</h1>
+    <p>{props.phone.description}</p>
+
+    <ul className="phone-thumbs">
+      { props.phone.images.map(imageUrl => (
+        <li>
+          <img src={imageUrl}/>
+        </li>
+      )) }
+    </ul>
+  </div>
+);
 
 export default App;
