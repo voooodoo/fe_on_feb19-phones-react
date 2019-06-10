@@ -24,7 +24,7 @@ const Catalog = (props) => {
               href="#123"
               className="btn btn-success"
               onClick={() => {
-                props.addItem(phone.id)
+                props.onAdd(phone.id)
               }}
             >
               Add

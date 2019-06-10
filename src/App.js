@@ -20,11 +20,13 @@ class App extends React.Component {
     };
 
     this.addItem = (phoneId) => {
-      this.setState({
-        basketItems: [
-          ...this.state.basketItems,
-          phoneId,
-        ],
+      this.setState((prevState) => {
+        return {
+          basketItems: [
+            ...prevState.basketItems,
+            phoneId,
+          ],
+        };
       });
     };
   }
@@ -57,9 +59,7 @@ class App extends React.Component {
                       selectedPhone: getById(phoneId),
                     });
                   }}
-                  addItem={(phoneId) => {
-                    this.addItem(phoneId);
-                  }}
+                  onAdd={this.addItem}
                 />
               ) }
             </div>
