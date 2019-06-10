@@ -18,6 +18,15 @@ class App extends React.Component {
       selectedPhone: null,
       basketItems: [],
     };
+
+    this.addItem = (phoneId) => {
+      this.setState({
+        basketItems: [
+          ...this.state.basketItems,
+          phoneId,
+        ],
+      });
+    };
   }
 
   render() {
@@ -27,7 +36,7 @@ class App extends React.Component {
           <div className="row">
             <div className="col-md-2">
               <Filter />
-              <Basket />
+              <Basket items={this.state.basketItems} />
             </div>
 
             <div className="col-md-10">
@@ -47,6 +56,9 @@ class App extends React.Component {
                     this.setState({
                       selectedPhone: getById(phoneId),
                     });
+                  }}
+                  addItem={(phoneId) => {
+                    this.addItem(phoneId);
                   }}
                 />
               ) }
