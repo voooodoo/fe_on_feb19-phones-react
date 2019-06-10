@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { getAll, getById } from './api/phone'
-import Basket from './Basket'
-import Filter from './Filter'
-import Catalog from './Catalog'
-import Viewer from './Viewer'
+import Basket from './components/Basket'
+import Filter from './components/Filter'
+import Catalog from './components/Catalog'
+import Viewer from './components/Viewer'
 
 import './App.css';
 

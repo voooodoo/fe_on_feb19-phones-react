@@ -5,12 +5,12 @@ const Catalog = (props) => {
     <ul className="phones">
 
       { props.phones.map(phone => (
-        <li className="thumbnail" key={phone.id} >
+        <li className="thumbnail">
           <a
             href={'#' + phone.id}
             className="thumb"
             onClick={() => {
-              props.onPhoneSelected(phone.id)
+              props.onPhoneSelected(phone.id);
             }}
           >
             <img
@@ -28,7 +28,7 @@ const Catalog = (props) => {
           <a
             href={'#' + phone.id}
             onClick={() => {
-              props.onPhoneSelected(phone.id)
+              props.onPhoneSelected(phone.id);
             }}
           >
             {phone.name}
