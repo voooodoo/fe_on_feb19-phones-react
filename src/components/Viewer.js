@@ -7,12 +7,12 @@ class Viewer extends React.Component {
     this.state = {
       mainImage: props.phone.images[0],
     };
+  }
 
-    this.selectImage = (imageUrl) => {
-      this.setState({
-        mainImage: imageUrl,
-      });
-    }
+  selectImage(imageUrl) {
+    this.setState({
+      mainImage: imageUrl,
+    });
   }
 
   render() {
@@ -38,7 +38,7 @@ class Viewer extends React.Component {
               <img
                 src={imageUrl}
                 onClick={() => {
-                  this.selectImage(imageUrl);
+                  this.selectImage(imageUrl)
                 }}
               />
             </li>
