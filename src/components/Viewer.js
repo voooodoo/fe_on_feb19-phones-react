@@ -20,6 +20,7 @@ class Viewer extends React.Component {
       <div>
         <img
           className="phone"
+          alt="Large"
           src={this.state.mainImage}
         />
 
@@ -34,8 +35,9 @@ class Viewer extends React.Component {
 
         <ul className="phone-thumbs">
           { this.props.phone.images.map(imageUrl => (
-            <li>
+            <li key={imageUrl}>
               <img
+                alt="thumbnail"
                 src={imageUrl}
                 onClick={() => {
                   this.selectImage(imageUrl)

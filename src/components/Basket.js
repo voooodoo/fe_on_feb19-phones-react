@@ -1,16 +1,19 @@
 import React from 'react';
 
-const Basket = () => {
-  return (
-    <section>
-      <p>Shopping Cart</p>
-      <ul>
-        <li>Phone 1 <button>x</button></li>
-        <li>Phone 2 <button>x</button></li>
-        <li>Phone 3 <button>x</button></li>
-      </ul>
-    </section>
-  );
-};
+const Basket = (props) => (
+  <section>
+    <p>Shopping Cart</p>
+    <ul>
+      { props.items && props.items.map(
+        (item, index) => (
+          <li key={index}>
+            {item.name}
+            <button>x</button>
+          </li>
+        )
+      ) }
+    </ul>
+  </section>
+);
 
 export default Basket;

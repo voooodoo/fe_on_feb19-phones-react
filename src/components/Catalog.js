@@ -5,7 +5,7 @@ const Catalog = (props) => {
     <ul className="phones">
 
       { props.phones.map(phone => (
-        <li className="thumbnail">
+        <li className="thumbnail" key={phone.id}>
           <a
             href={'#' + phone.id}
             className="thumb"
@@ -20,7 +20,7 @@ const Catalog = (props) => {
           </a>
 
           <div className="phones__btn-buy-wrapper">
-            <a className="btn btn-success">
+            <a href="#123" className="btn btn-success">
               Add
             </a>
           </div>
